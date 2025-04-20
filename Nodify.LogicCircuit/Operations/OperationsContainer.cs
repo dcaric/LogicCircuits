@@ -5,6 +5,7 @@ namespace Nodify.LogicCircuit
 {
     public static class OperationsContainer
     {
+        /*
         [Operation(MinInput = 2, MaxInput = 10, GenerateInputNames = false)]
         public static double Add(params double[] operands)
             => operands.Sum();
@@ -29,6 +30,12 @@ namespace Nodify.LogicCircuit
         public static double PI()
             => (double)Math.PI;
 
+
+        */
+
+        //************************************************************************************
+        // Logic functions 
+        //************************************************************************************
         public static double Not(double a)
             => a == 1 ? 0 : 1;
 
@@ -42,6 +49,8 @@ namespace Nodify.LogicCircuit
             if (a == 1 && b == 1 && c == 1 && d == 1) return 1;
             else return 0;
         }
+        //************************************************************************************
+
     }
 
     public sealed class OperationAttribute : Attribute

@@ -78,7 +78,7 @@
                         </StackPanel.Resources>
 
                         <StackPanel Margin="0 0 0 20">
-                            <TextBlock Text="(New) Drag and drop nodes from the toolbox"
+                            <TextBlock Text="Drag and drop nodes from the toolbox"
                                    TextWrapping="Wrap"
                                    Foreground="{DynamicResource NodeInput.BorderBrush}"
                                    FontWeight="Bold"/>
@@ -120,9 +120,6 @@
                                    TextWrapping="Wrap"
                                    FontWeight="Bold" />
                         <TextBlock Text="Create a LogicCircuit node and double click it to open"
-                                   TextWrapping="Wrap"
-                                   FontWeight="Bold" />
-                        <TextBlock Text="Create an Operation Graph and add operations to it"
                                    TextWrapping="Wrap"
                                    FontWeight="Bold" />
                     </StackPanel>

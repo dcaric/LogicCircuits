@@ -51,6 +51,7 @@ namespace Nodify.LogicCircuit
             _calculator = calculator;
             List<OperationInfoViewModel> operations = new List<OperationInfoViewModel>
             {
+                /*
                 new OperationInfoViewModel
                 {
                     Type = OperationType.Graph,
@@ -66,6 +67,7 @@ namespace Nodify.LogicCircuit
                     Type = OperationType.Expression,
                     Title = "Custom",
                 }
+                */
             };
             operations.AddRange(OperationFactory.GetOperationsInfo(typeof(OperationsContainer)));
 
