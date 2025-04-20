@@ -1,4 +1,79 @@
-﻿using System.Linq;
+﻿// -----------------------------------------------------------------------------
+//  HART OF THE LOGIC
+//
+// LogicCircuitViewModel.cs
+//
+//  Purpose:
+// This ViewModel represents the **entire logic circuit graph**.
+// It manages:
+// - Nodes (logic operations)
+// - Connections between nodes
+// - Selection
+// - Connection building (with drag-to-connect support)
+// - Integration with the operations menu (toolbox)
+//
+// It acts as the **core engine** behind the visual editor surface.
+//
+//  Key Responsibilities:
+//
+// 1. Operations (nodes):
+//    - Stored in `Operations`
+//    - Reactively listens to input/output changes
+//    - Automatically removes connections if inputs/outputs are removed
+//
+// 2. Connections (wires):
+//    - Stored in `Connections`
+//    - Automatically sets `IsConnected` flags and synchronizes values
+//    - Manages `ValueObservers` to propagate logic values
+//
+// 3. Selection:
+//    - Tracked via `SelectedOperations`
+//    - Used for deleting or grouping nodes (future functionality)
+//
+// 4. Pending Connection (live wire drag):
+//    - Stored in `PendingConnection`
+//    - Used when user starts dragging a wire
+//    - If wire is dropped without a target, opens the toolbox (`OperationsMenu`)
+//
+// 5. Commands (bindable actions for the UI):
+//    - `StartConnectionCommand`     → begins dragging a wire from a connector
+//    - `CreateConnectionCommand`    → finalizes a wire between two connectors
+//    - `DisconnectConnectorCommand`→ removes all connections to a connector
+//    - `DeleteSelectionCommand`     → deletes selected nodes
+//    - `GroupSelectionCommand`      → (commented out) groups nodes visually
+//
+//  Constructor:
+// - Wires up reactive listeners on `Operations` and `Connections` collections
+// - Subscribes to add/remove events to manage connector state and observers
+// - Initializes commands and the `OperationsMenu`
+//
+// -----------------------------------------------------------------------------
+//  Internal Methods:
+//
+// - `CanCreateConnection(source, target)`:
+//     Validates that the two connectors are different, on different nodes,
+//     and one is input while the other is output.
+//
+// - `CreateConnection(source, target)`:
+//     If target is null, opens the operations menu at drag location.
+//     If valid, removes any existing connection and creates a new one.
+//
+// - `DisconnectConnector(connector)`:
+//     Removes all connections related to a given input/output.
+//
+// - `DeleteSelection()`:
+//     Deletes all currently selected nodes and their connections.
+//
+// -----------------------------------------------------------------------------
+//  Used In:
+// - Main editor canvas view
+// - EditorViewModel (host of this LogicCircuit)
+// - OperationsMenuViewModel (to inject nodes on user request)
+//
+// -----------------------------------------------------------------------------
+
+
+using System.Linq;
 using System.Windows;
 
 namespace Nodify.LogicCircuit

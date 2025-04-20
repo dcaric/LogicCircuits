@@ -1,4 +1,57 @@
-﻿using System.ComponentModel;
+﻿// -----------------------------------------------------------------------------
+// OperationViewModel.cs
+//
+// Represents a single logic operation node in the visual node editor.
+//
+//  Purpose:
+// This class models a logic gate or mathematical operation in the editor.
+// It connects to input/output connectors, listens for input value changes,
+// and updates its output accordingly by executing the assigned IOperation.
+//
+//  Key Features:
+// - Holds visual properties (location, size, title, selection)
+// - Contains input/output connectors (used for wiring up in the UI)
+// - Reacts to value changes in inputs to trigger re-evaluation
+// - Supports executing operations like AND, OR, NOT, custom expressions
+//
+//  Constructor:
+// - Subscribes to input connector changes (added/removed)
+// - Hooks up change listeners to track value updates
+//
+//  Properties:
+// - `Input`: A collection of input connectors
+// - `Output`: A single output connector
+// - `Operation`: The logic operation to execute
+// - `Title`: Node label (e.g. "AND", "NOT")
+// - `Location`, `Size`: Position/size of the node in the editor
+// - `IsSelected`: Used to track UI selection state
+// - `IsReadOnly`: Optional flag to make the node immutable
+//
+//  Methods:
+// - `OnInputValueChanged()`:
+//     Triggered when any input's value changes
+//     → Collects input values
+//     → Executes the `IOperation`
+//     → Assigns the result to `Output.Value`
+//     → Used for live evaluation in the graph
+//
+// - `OnInputValueChanged(object?, PropertyChangedEventArgs)`:
+//     Called by input connector change notifications
+//     → Filters only on `Value` changes
+//     → Triggers main re-evaluation
+//
+// -----------------------------------------------------------------------------
+// Example:
+//   A NOT node receives input value 0
+//   -> This triggers PropertyChanged on the input
+//   -> OnInputValueChanged runs
+//   -> Operation.Execute([0]) = 1
+//   -> Output.Value becomes 1
+//
+// -----------------------------------------------------------------------------
+
+
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 

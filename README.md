@@ -10,11 +10,11 @@ This is a direct port of [Nodify by miroiu](https://github.com/miroiu/nodify) to
 
 > A collection of highly performant controls for node-based editors designed for MVVM.
 
-💻 A simple "real-time" calculator where each node represents an operation that takes input and feeds its output into other node's input.
+💻 A simple "real-time" logicCircuit where each node represents an operation that takes input and feeds its output into other node's input.
 
-> [Examples/Nodify.Calculator](Examples/Nodify.Calculator)
+> [Examples/Nodify.logicCircuit](Examples/Nodify.Calculator)
 
-![Calculator](https://i.imgur.com/rup58xn.gif)
+![LogicCircuit](https://i.imgur.com/rup58xn.gif)
 
 ## 📥 Installation
 Use the NuGet package manager to install `NodifyAvalonia`.
@@ -52,7 +52,7 @@ Avalonia version compatibility chart:
  - **Select**, **move** and **connect** nodes
  - Lots of **configurable** dependency properties
  - Ready for undo/redo
- - Example applications: 💻 [**Calculator**](Examples/Nodify.Calculator)
+ - Example applications: 💻 [**LogicCircuit**](Examples/Nodify.LogicCircuit)
 
 ## 😿 Unsupported Features
 

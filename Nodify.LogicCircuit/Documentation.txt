@@ -1,0 +1,136 @@
+﻿********************************************************************
+1) xaml Files
+********************************************************************
+
+Feature	Description
+===================
+Node Templates			Defines how each type of logic node (AND, OR, INPUT, etc.) appears
+Connector Templates		Defines how inputs/outputs are drawn
+Connection Templates	Defines how wires between nodes are drawn
+Operations Menu			A sidebar listing available nodes that can be dragged in
+
+Major Segments of xaml file
+===============================
+1. Resources Section (Brushes, Templates, Animations)
+<UserControl.Resources>
+
+This defines:
+	Grid visuals (SmallGridLinesDrawingBrush, LargeGridLinesDrawingBrush)
+	Gradient border styles
+	Animated border color changes
+	DataTemplates for:
+		Connections (wires)
+		Pending wires (being dragged)
+		Different types of logic nodes (normal, group, input...)
+	These define how the nodes and wires look and behave visually.
+
+
+
+2. Canvas Editor (nodify:NodifyEditor)
+<nodify:NodifyEditor ...>
+
+This is the main node editor surface, where:
+	Nodes (Operations) are shown
+	Connections (Connections) are drawn
+	Users can drag, drop, connect, and delete items
+
+Key features:
+	Supports zoom, pan, drag, drop
+	Binds to a LogicCircuit ViewModel
+	Defines templates for all node types
+	This is the heart of the visual logic circuit editor
+
+
+3. Node Types and Templates
+Inside <nodify:NodifyEditor.DataTemplates>
+
+it says:
+	If a ViewModel is a LogicCircuitOperationViewModel, show a nodify:Node with inputs/outputs
+	If it’s a LogicCircuitInputOperationViewModel, allow buttons to add/remove output ports
+	If it's a generic OperationViewModel, show a standard node
+	This is how the editor knows what type of visual block to render for each logic component
+
+
+4. Keybindings & Commands
+<nodify:NodifyEditor.KeyBindings>
+
+Defines keyboard shortcuts:
+	Press Delete → delete selected node(s)
+	Press C → group selected nodes
+	Enables keyboard control of the editor
+
+
+5. Sidebar (Right Panel)
+<Border HorizontalAlignment="Right" ...>
+
+This section:
+	Shows a scrollable list of available operations (e.g., AND, OR, NOT)
+	Users can drag and drop these onto the editor
+	Each is a styled nodify:Node preview
+	This is the toolbox of all available logic gates
+
+
+6. Decorators (Floating Menus or Overlays)
+<nodify:NodifyEditor.Decorators>
+	Can show overlays like a floating operations menu (advanced usage)
+	Summary Table
+
+
+Section				What it does
+==============================================================================
+Resources			Styles, animations, templates
+NodifyEditor		Main editor canvas
+DataTemplates		Defines how each node type looks and behaves
+KeyBindings			Keyboard shortcuts (delete, group)
+Sidebar				Toolbox with draggable logic operations
+Decorators			Optional overlays like menus or context panels
+
+
+
+
+
+
+
+
+
+
+********************************************************************
+2) CLASSES DESCRIPTION BY FEATURES
+********************************************************************
+Main Node Class
+
+Class									Role
+===========================================================================================================
+OperationViewModel						Core logic node with input/output, logic function, position, size
+Specialized Node Types (all inherit from OperationViewModel)
+
+
+Class									Role
+===========================================================================================================
+ExpandoOperationViewModel				Node with dynamic number of inputs (e.g. SUM, OR-N)
+ExpressionOperationViewModel			Node that evaluates a custom user-entered formula
+LogicCircuitOperationViewModel			Node that contains an inner logic circuit (nested circuit)
+LogicCircuitInputOperationViewModel		Special node inside a nested circuit that defines external inputs
+OperationGraphViewModel					LogicCircuit node with expand/collapse behavior
+OperationGroupViewModel					Purely visual container for grouping nodes (no logic or connectors)
+
+
+Summary:
+========
+Feature									Class
+===========================================================================================================
+A standard logic gate (AND, OR)			OperationViewModel
+A flexible input count node				ExpandoOperationViewModel
+A node with a custom expression			ExpressionOperationViewModel
+A node that contains a nested graph		LogicCircuitOperationViewModel
+To simulate circuit inputs				LogicCircuitInputOperationViewModel
+A collapsible composite node			OperationGraphViewModel
+A visual group box						OperationGroupViewModel
+
+
+
+********************************************************************
+3) IMPLEMENTATION OF ALL LOGICAL CIRCUITS
+********************************************************************
+
+Implementation of all logical circuits should be in the class Operations/OperationsContainer

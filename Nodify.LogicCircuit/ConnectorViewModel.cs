@@ -1,4 +1,20 @@
-﻿using System.Collections.Generic;
+﻿// ----------------------------------------------------------
+// ConnectorViewModel.cs
+//
+// Represents a single connector (input or output port) on a node.
+//
+// Each connector can:
+//   - Have a title (like "A", "B", "Out")
+//   - Hold a numeric value (used for logic/math calculations)
+//   - Know if it's an input or output
+//   - Track its visual anchor point (where connection lines attach)
+//   - Be linked to an Operation (the node it's attached to)
+//   - Notify other connectors when its value changes
+//
+// This is the core object used for visual connectors in GraphView.
+// ----------------------------------------------------------
+
+using System.Collections.Generic;
 using System.Windows;
 
 namespace Nodify.LogicCircuit

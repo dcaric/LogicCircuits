@@ -1,4 +1,18 @@
-﻿using System;
+﻿// -----------------------------------------------------------------------------
+// EditorViewModel.cs
+//
+// This class acts as the ViewModel for a visual logic editor surface.
+//
+// Responsibilities:
+// - Holds the active logic circuit (nodes, connections, toolbox)
+// - Provides a command to open nested (inner) logic circuits
+// - Supports parent/child navigation for hierarchical circuit design
+// - Exposes metadata like unique ID and editor name
+//
+// Used by the EditorView (UI - EditorView.xaml) to bind data, handle commands, and track circuit state.
+// -----------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 

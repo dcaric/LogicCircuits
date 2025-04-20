@@ -1,4 +1,52 @@
-﻿using System;
+﻿// -----------------------------------------------------------------------------
+// ApplicationViewModel.cs
+//
+//  Purpose:
+// This is the top-level ViewModel for the entire application.
+// It manages one or more logic circuit editors (`EditorViewModel`) —
+// including support for nested (inner) editors representing subcircuits.
+//
+//  Key Responsibilities:
+//
+// 1. `Editors`:
+//     - A collection of all active editors (main + subcircuits)
+//     - Supports nesting via the `Parent` reference in `EditorViewModel`
+//     - Used as a tab list or panel switcher in the UI
+//
+// 2. `SelectedEditor`:
+//     - Points to the currently active editor (for display and interaction)
+//
+// 3. `AddEditorCommand`:
+//     - Adds a new top-level editor (e.g., user clicks "New Circuit")
+//
+// 4. `CloseEditorCommand`:
+//     - Removes an editor by `Id`
+//     - Also removes any child editors related to that parent
+//
+// 5. `OnOpenInnerLogicCircuit()`:
+//     - Event handler for `EditorViewModel.OnOpenInnerLogicCircuit`
+//     - Opens a sub-circuit in a new editor tab or panel
+//     - Reuses an existing editor if the circuit was already opened
+//
+// 6. `AutoSelectNewEditor`:
+//     - If true, newly added editors will automatically be selected
+//     - Helps streamline workflow in tab-based or multi-editor UI
+//
+//  Behavior:
+//
+// - On startup, a default editor is added (`Editor 1`)
+// - When a logic node representing a nested circuit is double-clicked,
+//   `OnOpenInnerLogicCircuit()` is called:
+//     → Creates and shows a new editor for that nested circuit
+//     → Avoids duplication if already opened
+//
+//  UI Integration:
+// - Each editor corresponds to a logic canvas (like a tab or window)
+// - Can be used with a `TabControl`, `ListBox`, or similar to switch views
+//
+// -----------------------------------------------------------------------------
+
+using System;
 using System.Linq;
 using System.Windows.Input;
 

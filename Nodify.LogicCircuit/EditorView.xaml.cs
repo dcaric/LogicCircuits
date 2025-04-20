@@ -22,11 +22,11 @@ namespace Nodify.LogicCircuit
         
         private void OpenOperationsMenu(object? sender, PointerReleasedEventArgs e)
         {
-            if (!e.Handled && e.Source is NodifyEditor editor && !editor.IsPanning && editor.DataContext is LogicCircuitViewModel calculator &&
+            if (!e.Handled && e.Source is NodifyEditor editor && !editor.IsPanning && editor.DataContext is LogicCircuitViewModel logicCircuit &&
                 e.InitialPressMouseButton == MouseButton.Right)
             {
                 e.Handled = true;
-                calculator.OperationsMenu.OpenAt(editor.MouseLocation);
+                logicCircuit.OperationsMenu.OpenAt(editor.MouseLocation);
             }
         }
 
@@ -41,21 +41,21 @@ namespace Nodify.LogicCircuit
             ItemContainer? itemContainer = sender as ItemContainer;
             NodifyEditor? editor = sender as NodifyEditor ?? itemContainer?.Editor;
 
-            if (!e.Handled && editor?.DataContext is LogicCircuitViewModel calculator)
+            if (!e.Handled && editor?.DataContext is LogicCircuitViewModel logicCircuit)
             {
-                calculator.OperationsMenu.Close();
+                logicCircuit.OperationsMenu.Close();
             }
         }
 
         private void OnDropNode(object? sender, DragEventArgs e)
         {
             NodifyEditor? editor = (e.Source as NodifyEditor) ?? (e.Source as Control)?.GetLogicalParent() as NodifyEditor;
-            if(editor != null && editor.DataContext is LogicCircuitViewModel calculator
+            if(editor != null && editor.DataContext is LogicCircuitViewModel logicCircuit
                 && e.Data.Get(typeof(OperationInfoViewModel).FullName) is OperationInfoViewModel operation)
             {
                 OperationViewModel op = OperationFactory.GetOperation(operation);
                 op.Location = editor.GetLocationInsideEditor(e);
-                calculator.Operations.Add(op);
+                logicCircuit.Operations.Add(op);
 
                 e.Handled = true;
             }
