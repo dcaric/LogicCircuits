@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{E4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nodify.Shared", "Examples\Nodify.Shared\Nodify.Shared.csproj", "{499C8539-9973-4102-B976-57DB3F3C7DF3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nodify.Calculator", "Examples\Nodify.Calculator\Nodify.Calculator.csproj", "{7ADD1DAF-B589-4742-8E72-872D2842E73D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nodify.LogicCircuit", "Examples\Nodify.LogicCircuit\Nodify.LogicCircuit.csproj", "{7ADD1DAF-B589-4742-8E72-872D2842E73D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{88D231A7-D09F-492F-887F-DDBC46398284}"
 	ProjectSection(SolutionItems) = preProject
