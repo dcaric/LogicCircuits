@@ -1,0 +1,106 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Nodify">
+
+    <ControlTemplate x:Key="OutputConnectorThumbTemplate"
+                     TargetType="TemplatedControl">
+        <Ellipse Width="14"
+                 Height="14"
+                 Stroke="{TemplateBinding BorderBrush}"
+                 Fill="{TemplateBinding Background}"
+                 StrokeThickness="2" />
+    </ControlTemplate>
+
+    <LinearGradientBrush x:Key="OutputFadeOpacityMask"
+                         StartPoint="0% 0%"
+                         EndPoint="100% 0%">
+        <GradientStop Color="#22FFFFFF"
+                      Offset="0" />
+        <GradientStop Color="#88FFFFFF"
+                      Offset="0.3" />
+        <GradientStop Color="#88FFFFFF"
+                      Offset="0.7" />
+        <GradientStop Color="#22FFFFFF"
+                      Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="FadeOpacityMaskVerticalNodeOutput"
+                         StartPoint="0% 0%"
+                         EndPoint="0% 100%">
+        <GradientStop Color="#22FFFFFF"
+                      Offset="0" />
+        <GradientStop Color="#88FFFFFF"
+                      Offset="0.3" />
+        <GradientStop Color="#88FFFFFF"
+                      Offset="0.7" />
+        <GradientStop Color="#22FFFFFF"
+                      Offset="1" />
+    </LinearGradientBrush>
+
+    <ControlTheme TargetType="{x:Type local:NodeOutput}" x:Key="{x:Type local:NodeOutput}">
+        <Setter Property="BorderBrush"
+                Value="DodgerBlue" />
+        <Setter Property="Background"
+                Value="#2D2D30" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="Padding"
+                Value="4 2" />
+        <Setter Property="ConnectorTemplate"
+                Value="{StaticResource OutputConnectorThumbTemplate}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:NodeOutput}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Border IsVisible="False"
+                                x:Name="Highlight"
+                                OpacityMask="{StaticResource OutputFadeOpacityMask}"
+                                Background="{TemplateBinding BorderBrush}" />
+
+                        <StackPanel Orientation="{TemplateBinding Orientation}"
+                                    HorizontalAlignment="Right"
+                                    Margin="{TemplateBinding Padding}">
+
+                            <ContentControl Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" />
+
+                            <TemplatedControl x:Name="PART_Connector"
+                                     Focusable="False"
+                                     VerticalAlignment="Center"
+                                     Background="Transparent"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     Template="{TemplateBinding ConnectorTemplate}" />
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style Selector="^ /template/ TemplatedControl#PART_Connector">
+            <Setter Property="Margin"
+                    Value="5 0 0 0" />
+        </Style>
+        <Style Selector="^:vertical /template/ TemplatedControl#PART_Connector">
+            <Setter Property="Margin"
+                    Value="0 5 0 0" />
+        </Style>
+        <Style Selector="^:vertical /template/ Border#Highlight">
+            <Setter Property="OpacityMask"
+                    Value="{StaticResource FadeOpacityMaskVerticalNodeOutput}" />
+        </Style>
+        <Style Selector="^:connected /template/ TemplatedControl#PART_Connector">
+            <Setter Property="Background"
+                    Value="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+        </Style>
+        <Style Selector="^.isOverElement /template/ TemplatedControl#PART_Connector">
+            <Setter Property="Background"
+                    Value="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+        </Style>
+        <Style Selector="^:pointerover /template/ Border#Highlight">
+            <Setter Property="IsVisible"
+                    Value="True" />
+        </Style>
+        <Style Selector="^.isOverElement /template/ Border#Highlight">
+            <Setter Property="IsVisible"
+                    Value="True" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

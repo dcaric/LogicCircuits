@@ -1,0 +1,143 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Nodify">
+
+    <DataTemplate x:Key="DefaultInputConnectorTemplate">
+        <local:NodeInput />
+    </DataTemplate>
+
+    <DataTemplate x:Key="DefaultOutputConnectorTemplate">
+        <local:NodeOutput />
+    </DataTemplate>
+
+    <ControlTheme x:Key="DefaultHeaderContainerStyle"
+           TargetType="Border">
+        <Setter Property="CornerRadius"
+                Value="3 3 0 0" />
+        <Setter Property="Padding"
+                Value="6 4 6 4" />
+    </ControlTheme>
+
+    <ControlTheme x:Key="DefaultFooterContainerStyle"
+           TargetType="Border">
+        <Setter Property="CornerRadius"
+                Value="0 0 3 3" />
+        <Setter Property="Padding"
+                Value="6 4 6 4" />
+    </ControlTheme>
+
+    <ControlTheme TargetType="{x:Type local:Node}" x:Key="{x:Type local:Node}">
+        <Setter Property="Background"
+                Value="#2D2D30" />
+        <Setter Property="ContentBrush"
+                Value="#2D2D30" />
+        <Setter Property="HeaderBrush"
+                Value="#1E1E1E" />
+        <Setter Property="FooterBrush"
+                Value="#1E1E1E" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="MinHeight"
+                Value="15" />
+        <Setter Property="MinWidth"
+                Value="15" />
+        <Setter Property="VerticalAlignment"
+                Value="Top" />
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="InputConnectorTemplate"
+                Value="{StaticResource DefaultInputConnectorTemplate}" />
+        <Setter Property="OutputConnectorTemplate"
+                Value="{StaticResource DefaultOutputConnectorTemplate}" />
+        <Setter Property="HeaderContainerStyle"
+                Value="{StaticResource DefaultHeaderContainerStyle}" />
+        <Setter Property="FooterContainerStyle"
+                Value="{StaticResource DefaultFooterContainerStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Node}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            CornerRadius="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!--Header-->
+                            <Border IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                    Name="PART_Header"
+                                    Background="{TemplateBinding HeaderBrush}"
+                                    Theme="{TemplateBinding HeaderContainerStyle}"
+                                    Grid.ColumnSpan="3">
+                                <ContentPresenter Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" />
+                            </Border>
+
+                            <!--Body-->
+                            <Border Theme="{TemplateBinding ContentContainerStyle}"
+                                    Grid.Row="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--Data IN-->
+                                    <ItemsControl ItemsSource="{TemplateBinding Input}"
+                                                  VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                  ItemTemplate="{TemplateBinding InputConnectorTemplate}"
+                                                  Focusable="False" />
+
+                                    <!--Content-->
+                                    <Border Grid.Column="1" 
+                                            Padding="16 0 16 0"
+                                            Background="{TemplateBinding ContentBrush}">
+                                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                          Content="{TemplateBinding Content}"
+                                                          ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                    </Border>
+
+                                    <!--Data OUT-->
+                                    <!-- HorizontalContentAlignment="Right" -->
+                                    <ItemsControl ItemsSource="{TemplateBinding Output}"
+                                                  ItemTemplate="{TemplateBinding OutputConnectorTemplate}"
+                                                  VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                  Grid.Column="2"
+                                                  Focusable="False" />
+                                </Grid>
+                            </Border>
+
+                            <!--Footer-->
+                            <Border IsVisible="{TemplateBinding HasFooter}"
+                                    Background="{TemplateBinding FooterBrush}"
+                                    Theme="{TemplateBinding FooterContainerStyle}"
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="3">
+                                <ContentControl Content="{TemplateBinding Footer}" ContentTemplate="{TemplateBinding FooterTemplate}" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style Selector="^ /template/ Border#PART_Header">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="^:has-header /template/ Border#PART_Header">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+    </ControlTheme>
+
+</ResourceDictionary>

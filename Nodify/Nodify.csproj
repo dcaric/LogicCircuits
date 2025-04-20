@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Authors>miroiu, bandysc</Authors>
+    <Company />
+    <PackageId>NodifyAvalonia</PackageId>
+    <Product>NodifyAvalonia</Product>
+    <Description>The core controls for a node based editor (designed for MVVM) for Avalonia</Description>
+    <Copyright>Miroiu Emanuel</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/BAndysc/nodify-avalonia</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/miroiu/nodify</RepositoryUrl>
+    <PackageTags>wpf mvvm node-editor controls</PackageTags>
+    <Version>6.5.0</Version>
+    <PackageReleaseNotes>
+      > - Features:
+      >	  - Added SelectedConnection, SelectedConnections, CanSelectMultipleConnections and CanSelectMultipleItems dependency properties to NodifyEditor
+      >	  - Added IsSelected and IsSelectable attached dependency properties to BaseConnection
+      >	  - Added PrioritizeBaseConnectionForSelection static field to BaseConnection
+      >	  - Added EditorGestures.Connection.Selection
+      >	  - Added support for ScrollViewer in NodifyEditor (implements IScrollInfo)
+      >	  - Added NodifyEditor.ScrollIncrement dependency property
+    </PackageReleaseNotes>
+    <AssemblyOriginatorKeyFile>..\build\Nodify.snk</AssemblyOriginatorKeyFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <WarningsAsErrors>$(WarningsAsErrors),AVP1000, AVP1001, AVP1002, AVP1010, AVP1011, AVP1012, AVP1013, AVP1020, AVP1021, AVP1022, AVP1030, AVP1031, AVP1032, AVP1040, AVA2001</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <SignAssembly>true</SignAssembly>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Themes\*.xaml" />
+    <AvaloniaResource Include="Themes\*.xaml" />
+    <None Remove="Themes\Styles\*.xaml" />
+    <AvaloniaResource Include="Themes\Styles\*.xaml" />
+  </ItemGroup>
+  
+</Project>

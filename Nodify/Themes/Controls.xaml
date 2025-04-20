@@ -1,0 +1,243 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Nodify">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--NODIFY EDITOR-->
+
+    <ControlTheme x:Key="NodifyEditor.SelectionRectangleStyle"
+           TargetType="Rectangle">
+        <Setter Property="Stroke"
+                Value="{StaticResource NodifyEditor.SelectionRectangleStrokeBrush}" />
+        <Setter Property="StrokeThickness"
+                Value="1" />
+        <Setter Property="Fill"
+                Value="{StaticResource NodifyEditor.SelectionRectangleBackgroundBrush}" />
+    </ControlTheme>
+
+    <ControlTheme TargetType="{x:Type local:NodifyEditor}" x:Key="{x:Type local:NodifyEditor}"
+                  BasedOn="{StaticResource {x:Type local:NodifyEditor}}">
+        <Setter Property="Background"
+                Value="{StaticResource NodifyEditor.BackgroundBrush}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource NodifyEditor.ForegroundBrush}" />
+        <Setter Property="SelectionRectangleStyle"
+                Value="{StaticResource NodifyEditor.SelectionRectangleStyle}" />
+    </ControlTheme>
+
+    <!--ITEM CONTAINER-->
+
+    <ControlTheme TargetType="{x:Type local:ItemContainer}" x:Key="{x:Type local:ItemContainer}"
+                  BasedOn="{StaticResource {x:Type local:ItemContainer}}">
+        <Setter Property="HighlightBrush"
+                Value="{StaticResource ItemContainer.HighlightBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource ItemContainer.BorderBrush}" />
+        <Setter Property="SelectedBrush"
+                Value="{StaticResource ItemContainer.SelectedBrush}" />
+    </ControlTheme>
+    
+    <!--DECORATOR CONTAINER-->
+
+    <ControlTheme TargetType="{x:Type local:DecoratorContainer}" x:Key="{x:Type local:DecoratorContainer}"
+                  BasedOn="{StaticResource {x:Type local:DecoratorContainer}}">
+        <Setter Property="RenderTransformOrigin"
+                Value="0,0" />
+    </ControlTheme>
+
+    <!--NODE-->
+
+    <ControlTheme TargetType="{x:Type local:Node}" x:Key="{x:Type local:Node}"
+           BasedOn="{StaticResource {x:Type local:Node}}">
+        <Setter Property="Background"
+                Value="{StaticResource Node.BackgroundBrush}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource Node.ForegroundBrush}" />
+        <Setter Property="ContentBrush"
+                Value="{StaticResource Node.ContentBrush}" />
+        <Setter Property="HeaderBrush"
+                Value="{StaticResource Node.HeaderBrush}" />
+        <Setter Property="FooterBrush"
+                Value="{StaticResource Node.FooterBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource Node.BorderBrush}" />
+        <Style Selector="^:has-header">
+            <Setter Property="Foreground"
+                    Value="{StaticResource Node.HeaderForegroundBrush}" />
+        </Style>
+    </ControlTheme>
+    
+    <!--STATE NODE-->
+
+    <ControlTheme TargetType="{x:Type local:StateNode}" x:Key="{x:Type local:StateNode}"
+           BasedOn="{StaticResource {x:Type local:StateNode}}">
+        <Setter Property="Background"
+                Value="{StaticResource StateNode.BackgroundBrush}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource StateNode.ForegroundBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource StateNode.BorderBrush}" />
+        <Setter Property="HighlightBrush"
+                Value="{StaticResource StateNode.HighlightBrush}" />
+    </ControlTheme>
+
+    <!--GROUPING NODE-->
+
+    <ControlTheme TargetType="{x:Type local:GroupingNode}" x:Key="{x:Type local:GroupingNode}"
+           BasedOn="{StaticResource {x:Type local:GroupingNode}}">
+        <Setter Property="Background"
+                Value="{StaticResource GroupingNode.BackgroundBrush}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource GroupingNode.ForegroundBrush}" />
+        <Setter Property="HeaderBrush"
+                Value="{StaticResource GroupingNode.HeaderBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource GroupingNode.BorderBrush}" />
+    </ControlTheme>
+
+    <!--KNOT NODE-->
+
+    <ControlTheme TargetType="{x:Type local:KnotNode}" x:Key="{x:Type local:KnotNode}"
+           BasedOn="{StaticResource {x:Type local:KnotNode}}">
+        <Setter Property="Background"
+                Value="{StaticResource KnotNode.BackgroundBrush}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource KnotNode.ForegroundBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource KnotNode.BorderBrush}" />
+    </ControlTheme>
+
+    <!--CONNECTOR-->
+
+    <ControlTheme TargetType="{x:Type local:Connector}" x:Key="{x:Type local:Connector}"
+           BasedOn="{StaticResource {x:Type local:Connector}}">
+        <Setter Property="Background"
+                Value="{StaticResource Connector.BackgroundBrush}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource Connector.ForegroundBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource Connector.BorderBrush}" />
+    </ControlTheme>
+
+    <!--NODE INPUT-->
+
+    <ControlTheme TargetType="{x:Type local:NodeInput}" x:Key="{x:Type local:NodeInput}"
+           BasedOn="{StaticResource {x:Type local:NodeInput}}">
+        <Setter Property="Background"
+                Value="{StaticResource NodeInput.BackgroundBrush}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource NodeInput.ForegroundBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource NodeInput.BorderBrush}" />
+    </ControlTheme>
+
+    <!--NODE OUTPUT-->
+
+    <ControlTheme TargetType="{x:Type local:NodeOutput}" x:Key="{x:Type local:NodeOutput}"
+           BasedOn="{StaticResource {x:Type local:NodeOutput}}">
+        <Setter Property="Background"
+                Value="{StaticResource NodeOutput.BackgroundBrush}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource NodeOutput.ForegroundBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource NodeOutput.BorderBrush}" />
+    </ControlTheme>
+
+    <!--CONNECTION-->
+
+    <ControlTheme TargetType="{x:Type local:Connection}" x:Key="{x:Type local:Connection}"
+           BasedOn="{StaticResource {x:Type local:Connection}}">
+        <Setter Property="Stroke"
+                Value="{StaticResource Connection.StrokeBrush}" />
+        <Setter Property="Fill"
+                Value="{StaticResource Connection.StrokeBrush}" />
+    </ControlTheme>
+
+    <!--LINE CONNECTION-->
+
+    <ControlTheme TargetType="{x:Type local:LineConnection}" x:Key="{x:Type local:LineConnection}"
+           BasedOn="{StaticResource {x:Type local:LineConnection}}">
+        <Setter Property="Stroke"
+                Value="{StaticResource LineConnection.StrokeBrush}" />
+        <Setter Property="Fill"
+                Value="{StaticResource LineConnection.StrokeBrush}" />
+    </ControlTheme>
+
+    <!--CIRCUIT CONNECTION-->
+
+    <ControlTheme TargetType="{x:Type local:CircuitConnection}" x:Key="{x:Type local:CircuitConnection}"
+           BasedOn="{StaticResource {x:Type local:CircuitConnection}}">
+        <Setter Property="Stroke"
+                Value="{StaticResource CircuitConnection.StrokeBrush}" />
+        <Setter Property="Fill"
+                Value="{StaticResource CircuitConnection.StrokeBrush}" />
+    </ControlTheme>
+
+    <!--STEP CONNECTION-->
+
+    <ControlTheme TargetType="{x:Type local:StepConnection}" x:Key="{x:Type local:StepConnection}"
+                  BasedOn="{StaticResource {x:Type local:StepConnection}}">
+        <Setter Property="Stroke"
+                Value="{StaticResource StepConnection.StrokeBrush}" />
+        <Setter Property="Fill"
+                Value="{StaticResource StepConnection.StrokeBrush}" />
+    </ControlTheme>
+
+    <!--PENDING CONNECTION-->
+
+    <ControlTheme TargetType="{x:Type local:PendingConnection}" x:Key="{x:Type local:PendingConnection}"
+           BasedOn="{StaticResource {x:Type local:PendingConnection}}">
+        <Setter Property="Stroke"
+                Value="{StaticResource PendingConnection.StrokeBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{StaticResource PendingConnection.BorderBrush}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource PendingConnection.ForegroundBrush}" />
+        <Setter Property="Background"
+                Value="{StaticResource PendingConnection.BackgroundBrush}" />
+    </ControlTheme>
+
+    <!--CUTTING LINE-->
+
+    <ControlTheme TargetType="{x:Type local:CuttingLine}" x:Key="{x:Type local:CuttingLine}"
+           BasedOn="{StaticResource {x:Type local:CuttingLine}}">
+        <Setter Property="Fill"
+                Value="{StaticResource NodifyEditor.CuttingLineBackgroundBrush}" />
+        <Setter Property="Stroke"
+                Value="{StaticResource NodifyEditor.CuttingLineStrokeBrush}" />
+    </ControlTheme>
+
+    <!--MINIMAP-->
+
+    <ControlTheme x:Key="Minimap.ViewportStyle"
+           TargetType="Rectangle">
+        <Setter Property="Stroke"
+                Value="{StaticResource Minimap.ViewportStrokeBrush}" />
+        <Setter Property="StrokeThickness"
+                Value="3" />
+        <Setter Property="Fill"
+                Value="{StaticResource Minimap.ViewportBackgroundBrush}" />
+        <Setter Property="StrokeJoin"
+                Value="Round" />
+        <Setter Property="StrokeLineCap"
+                Value="Round" />
+    </ControlTheme>
+
+    <ControlTheme TargetType="{x:Type local:Minimap}" x:Key="{x:Type local:Minimap}"
+           BasedOn="{StaticResource {x:Type local:Minimap}}">
+        <Setter Property="Background"
+                Value="{StaticResource Minimap.BackgroundBrush}" />
+        <Setter Property="ViewportStyle"
+                Value="{StaticResource Minimap.ViewportStyle}" />
+    </ControlTheme>
+
+    <ControlTheme TargetType="{x:Type local:MinimapItem}" x:Key="{x:Type local:MinimapItem}"
+           BasedOn="{StaticResource {x:Type local:MinimapItem}}">
+        <Setter Property="Background"
+                Value="{StaticResource MinimapItem.BackgroundBrush}" />
+    </ControlTheme>
+
+</ResourceDictionary>
