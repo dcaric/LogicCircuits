@@ -139,9 +139,9 @@ namespace Nodify.LogicCircuit
                     DisconnectConnector(input);
                 }
 
-                if (x.Output != null)
+                foreach (var output in x.Output)
                 {
-                    DisconnectConnector(x.Output);
+                    DisconnectConnector(output);
                 }
             });
 

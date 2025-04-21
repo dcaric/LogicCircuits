@@ -130,7 +130,56 @@ A visual group box						OperationGroupViewModel
 
 
 ********************************************************************
-3) IMPLEMENTATION OF ALL LOGICAL CIRCUITS
+3) IMPLEMENTATION OF ALL LOGICAL CIRCUITS WITH SINGLE OUTPUT
 ********************************************************************
 
 Implementation of all logical circuits should be in the class Operations/OperationsContainer
+Check how NOT and AND are implements in this class
+
+
+
+********************************************************************
+4) HOW TO CREATE NEW CUSTOM LOGIC CIRCUIT WITH MULTIPLE OUTPUTS
+********************************************************************
+
+	4.1) How to Add a Custom Logic Node with Multiple Outputs (e.g. And2)
+		Design in the folder Operations class like And2Operations.cs
+		Each class will depent on the circuit logic
+
+	4.2) In the OperationFactory.cs
+
+                  else if (para.Length == 0)
+                    {
+                        if (method.ReturnType == typeof(IOperation))
+                        {
+                            var instance = (IOperation)method.Invoke(null, null)!;
+                            op.Operation = instance;
+
+
+                            if (attr != null)
+                            {
+                                op.MinInput = attr.MinInput;
+                                op.MaxInput = attr.MaxInput;
+                                generateInputNames = attr.GenerateInputNames;
+
+                           
+                                op.OutputLabels = attr.OutputLabels;
+                                op.InputLabels = attr.InputLabels;
+
+                            }
+
+                            // Detect special multi-output operation 
+                            if (instance is AndNand) <===== For each complex circuit set OperationType.ComplexCircuits
+                            {
+                                op.Type = OperationType.ComplexCircuits; // type for the Jogic Circuit
+                            }
+                        }
+
+
+
+	4.3) Calling this new complex circuit from OperationsContainer.cs
+	Register the operation in OperationsContainer, so it gets picked up by the factory via reflection:
+	example:
+    [Operation(MinInput = 2, MaxInput = 2, OutputLabels = new[] { "AND", "NAND" }, InputLabels = new[] { "In1", "In2" })]
+    public static IOperation AndNand()
+            => new AndNand();

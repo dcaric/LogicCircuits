@@ -8,7 +8,10 @@ namespace Nodify.LogicCircuit
 
         public ParamsOperation(Func<double[], double> func) => _func = func;
 
-        public double Execute(params double[] operands)
+        /*public double Execute(params double[] operands)
+            => _func.Invoke(operands);*/
+
+        public object Execute(params double[] operands)
             => _func.Invoke(operands);
     }
 }

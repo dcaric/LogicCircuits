@@ -44,7 +44,8 @@ namespace Nodify.LogicCircuit
         Expression,
         LogicCircuit,
         Group,
-        Graph
+        Graph,
+        ComplexCircuits
     }
 
     public class OperationInfoViewModel
@@ -53,6 +54,12 @@ namespace Nodify.LogicCircuit
         public OperationType Type { get; set; }
         public IOperation? Operation { get; set; }
         public List<string?> Input { get; } = new List<string?>();
+
+        public string[]? InputLabels { get; set; }
+
+        public List<string?> Output { get; set; } = new(); // new multiple outputs
+        public string[]? OutputLabels { get; set; }
+
         public uint MinInput { get; set; }
         public uint MaxInput { get; set; }
     }

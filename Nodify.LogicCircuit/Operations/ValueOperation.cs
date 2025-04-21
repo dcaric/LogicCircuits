@@ -8,7 +8,7 @@ namespace Nodify.LogicCircuit
 
         public ValueOperation(Func<double> func) => _func = func;
 
-        public double Execute(params double[] operands)
+        public object Execute(params double[] operands)
             => _func();
     }
 }

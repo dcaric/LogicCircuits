@@ -2,7 +2,7 @@
 
 namespace Nodify.LogicCircuit
 {
-    public class UnaryOperation : IOperation
+    /*public class UnaryOperation : IOperation
     {
         private readonly Func<double, double> _func;
 
@@ -10,5 +10,14 @@ namespace Nodify.LogicCircuit
 
         public double Execute(params double[] operands)
             => _func.Invoke(operands[0]);
+    }*/
+
+    public class UnaryOperation : IOperation
+    {
+        private readonly Func<double, double> _func;
+
+        public UnaryOperation(Func<double, double> func) => _func = func;
+
+        public object Execute(params double[] operands) => _func(operands[0]);
     }
 }

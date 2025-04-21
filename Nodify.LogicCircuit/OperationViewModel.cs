@@ -51,6 +51,7 @@
 // -----------------------------------------------------------------------------
 
 
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -121,7 +122,8 @@ namespace Nodify.LogicCircuit
 
         public NodifyObservableCollection<ConnectorViewModel> Input { get; } = new NodifyObservableCollection<ConnectorViewModel>();
 
-        private ConnectorViewModel? _output;
+        // old when it was only one output
+        /*private ConnectorViewModel? _output;
         public ConnectorViewModel? Output
         {
             get => _output;
@@ -132,9 +134,13 @@ namespace Nodify.LogicCircuit
                     _output.Operation = this;
                 }
             }
-        }
+        }*/
 
-        protected virtual void OnInputValueChanged()
+        public NodifyObservableCollection<ConnectorViewModel> Output { get; set; } = new NodifyObservableCollection<ConnectorViewModel>();
+
+
+        // old when it was one output
+        /*protected virtual void OnInputValueChanged()
         {
             if (Output != null && Operation != null)
             {
@@ -148,6 +154,61 @@ namespace Nodify.LogicCircuit
 
                 }
             }
+        }*/
+
+        /*protected virtual void OnInputValueChanged()
+        {
+            if (Output.Count > 0 && Operation != null)
+            {
+                try
+                {
+                    var input = Input.Select(i => i.Value).ToArray();
+                    double result = Operation.Execute(input);
+
+                    // For now, same result are to all outputs.
+                    // can be customized later.
+                    foreach (var output in Output)
+                    {
+                        output.Value = result;
+                    }
+                }
+                catch
+                {
+                    // Swallow errors silently
+                }
+            }
+        }*/
+
+
+        protected virtual void OnInputValueChanged()
+        {
+            if (Output.Count > 0 && Operation != null)
+            {
+                try
+                {
+                    var input = Input.Select(i => i.Value).ToArray();
+                    var result = Operation.Execute(input);
+
+                    if (result is double d) // single output
+                    {
+                        Output[0].Value = d;
+                    }
+                    else if (result is double[] array)
+                    {
+                        for (int i = 0; i < array.Length && i < Output.Count; i++)
+                        {
+                            Output[i].Value = array[i];
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle errors if needed
+                    Console.WriteLine($"Execution error in {Title}: {ex.Message}");
+                }
+            }
         }
+
+
     }
 }

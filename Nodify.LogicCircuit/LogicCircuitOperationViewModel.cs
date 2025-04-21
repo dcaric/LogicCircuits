@@ -53,6 +53,7 @@
 // -----------------------------------------------------------------------------
 
 using System.Windows;
+using System.Linq;
 
 namespace Nodify.LogicCircuit
 {
@@ -80,9 +81,15 @@ namespace Nodify.LogicCircuit
             InnerLogicCircuit.Operations.Add(InnerInput);
             InnerLogicCircuit.Operations.Add(InnerOutput);
 
-            Output = new ConnectorViewModel();
 
-            InnerOutput.Input[0].ValueObservers.Add(Output);
+            //Output = new ConnectorViewModel();
+            Output.Add(new ConnectorViewModel());
+
+            //InnerOutput.Input[0].ValueObservers.Add(Output);
+            if (Output.Any())
+            {
+                InnerOutput.Input[0].ValueObservers.Add(Output.First());
+            }
 
             InnerInput.Output.ForEach(x => Input.Add(new ConnectorViewModel
             {

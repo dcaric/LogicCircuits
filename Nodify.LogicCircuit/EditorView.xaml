@@ -158,6 +158,8 @@
                              DragDrop.AllowDrop="True"
                              x:Name="Editor">
             <nodify:NodifyEditor.Resources>
+                
+                
                 <ControlTheme TargetType="{x:Type nodify:NodeInput}" x:Key="{x:Type nodify:NodeInput}"
                        BasedOn="{StaticResource {x:Type nodify:NodeInput}}">
                     <Setter Property="Header"
@@ -184,9 +186,10 @@
                 </ControlTheme>
 
                 <ControlTheme TargetType="{x:Type nodify:NodeOutput}" x:Key="{x:Type nodify:NodeOutput}"
-                       BasedOn="{StaticResource {x:Type nodify:NodeOutput}}">
+                              BasedOn="{StaticResource {x:Type nodify:NodeOutput}}">
                     <Setter Property="Header"
                             Value="{Binding}" />
+                    <!--THIS IS MANDATORY -->
                     <Setter Property="IsConnected"
                             Value="{Binding IsConnected}" />
                     <Setter Property="Anchor"
@@ -194,12 +197,19 @@
                     <Setter Property="HeaderTemplate">
                         <Setter.Value>
                             <DataTemplate DataType="{x:Type local:ConnectorViewModel}">
-                                <TextBox Text="{Binding Value}"
-                                         IsEnabled="False" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Title}" Margin="0,0,5,0" />
+                                    <TextBlock Text="{Binding Value}" FontWeight="Bold" />
+                                </StackPanel>
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>
                 </ControlTheme>
+
+
+
+
+
             </nodify:NodifyEditor.Resources>
 
             <nodify:NodifyEditor.DataTemplates>
@@ -310,9 +320,17 @@
                 </DataTemplate>
 
                 <DataTemplate DataType="{x:Type local:ExpressionOperationViewModel}">
-                    <nodify:Node Content="{Binding}"
+                    
+                    <!-- old single output -->
+                    <!--<nodify:Node Content="{Binding}"
                                  Input="{Binding Input}"
-                                 Output="{Binding Output, Converter={StaticResource ItemToListConverter}}">
+                                 Output="{Binding Output, Converter={StaticResource ItemToListConverter}}">-->
+
+                    <!-- new multiple outputs -->
+                    <nodify:Node Content="{Binding}"
+                                Input="{Binding Input}"
+                                Output="{Binding Output}">
+                        
                         <nodify:Node.ContentTemplate>
                             <DataTemplate DataType="{x:Type local:ExpressionOperationViewModel}">
                                 <TextBox Text="{Binding Expression}"
@@ -324,10 +342,20 @@
                 </DataTemplate>
 
                 <DataTemplate DataType="{x:Type local:LogicCircuitOperationViewModel}">
-                    <nodify:Node Header="{Binding Title}"
+                    
+                    <!-- ols single ouput -->
+                    <!--<nodify:Node Header="{Binding Title}"
                                  Input="{Binding Input}"
                                  Output="{Binding Output, Converter={StaticResource ItemToListConverter}}"
-                                 ToolTip.Tip="Double click to expand">
+                                 ToolTip.Tip="Double click to expand">-->
+
+                    
+                    <!-- new multiple outputs -->
+                    <nodify:Node Header="{Binding Title}"
+                                Input="{Binding Input}"
+                                Output="{Binding Output}"
+                                ToolTip.Tip="Double click to expand">
+                        
                         <Interaction.Behaviors>
                             <RoutedEventTriggerBehavior RoutedEvent="{x:Static InputElement.DoubleTappedEvent}">
                                 <InvokeCommandAction Command="{Binding DataContext.OpenLogicCircuitCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -350,6 +378,8 @@
                         </StackPanel>
                         
                         <nodify:Node.Resources>
+                            
+                            
                             <ControlTheme TargetType="{x:Type nodify:NodeOutput}" x:Key="{x:Type nodify:NodeOutput}"
                                           BasedOn="{StaticResource {x:Type nodify:NodeOutput}}">
                                 <Setter Property="Header"
@@ -371,6 +401,8 @@
                                     </Setter.Value>
                                 </Setter>
                             </ControlTheme>
+                            
+                            
                         </nodify:Node.Resources>
                     </nodify:Node>
                 </DataTemplate>
@@ -380,11 +412,21 @@
                                          ActualSize="{Binding GroupSize, Mode=TwoWay}" />
                 </DataTemplate>
 
-                <DataTemplate DataType="{x:Type local:OperationViewModel}">
+                <!-- old single output -->
+                <!--<DataTemplate DataType="{x:Type local:OperationViewModel}">
                     <nodify:Node Content="{Binding Title}"
                                  Input="{Binding Input}"
                                  Output="{Binding Output, Converter={StaticResource ItemToListConverter}}" />
+                </DataTemplate>-->
+                
+                <!-- new many outputs -->
+                <DataTemplate DataType="{x:Type local:OperationViewModel}">
+                    <nodify:Node Content="{Binding Title}"
+                                 Input="{Binding Input}"
+                                 Output="{Binding Output}" />
                 </DataTemplate>
+
+
             </nodify:NodifyEditor.DataTemplates>
             
             <nodify:NodifyEditor.KeyBindings>
@@ -441,11 +483,17 @@
                                          PointerPressed="OnNodePressed"
                                          PointerExited="OnNodeExited"
                                          PointerMoved="OnNodeDrag">
-                                <nodify:Node.Output>
+                                
+                                <!-- old single output -->
+                                <!--<nodify:Node.Output>
                                     <collections:ArrayList>
                                         <sys:String>Output</sys:String>
                                     </collections:ArrayList>
-                                </nodify:Node.Output>
+                                </nodify:Node.Output>-->
+                                
+                                <!-- new multiple outputs -->
+                                <nodify:Node Output="{Binding Output}" />
+                                
                                 <!-- <nodify:Node.Styles> -->
                                 <!--     <Style Selector="nodify|Node"> -->
                                 <!--         <Style.Animations> -->

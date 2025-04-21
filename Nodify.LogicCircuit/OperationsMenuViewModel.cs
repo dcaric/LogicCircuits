@@ -135,7 +135,15 @@ namespace Nodify.LogicCircuit
             var pending = _logicCircuit.PendingConnection;
             if (pending.IsVisible)
             {
-                var connector = pending.Source.IsInput ? op.Output : op.Input.FirstOrDefault();
+                //var connector = pending.Source.IsInput ? op.Output : op.Input.FirstOrDefault();
+                var connector = pending.Source.IsInput
+                    ? op.Output.FirstOrDefault()
+                    : op.Input.FirstOrDefault();
+
+                if (connector != null && _logicCircuit.CanCreateConnection(pending.Source, connector))
+                {
+                    _logicCircuit.CreateConnection(pending.Source, connector);
+                }
                 if (connector != null && _logicCircuit.CanCreateConnection(pending.Source, connector))
                 {
                     _logicCircuit.CreateConnection(pending.Source, connector);

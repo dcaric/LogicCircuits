@@ -6,9 +6,10 @@ namespace Nodify.LogicCircuit
     {
         private readonly Func<double, double, double> _func;
 
-        public BinaryOperation(Func<double, double, double> func) => _func = func;
+        public BinaryOperation(Func<double, double, double> func)
+            => _func = func;
 
-        public double Execute(params double[] operands)
+        public object Execute(params double[] operands)
             => _func.Invoke(operands[0], operands[1]);
     }
 }

@@ -98,7 +98,7 @@ namespace Nodify.LogicCircuit
             }
         }
 
-        protected override void OnInputValueChanged()
+        /*protected override void OnInputValueChanged()
         {
             if (Output != null && _expr != null)
             {
@@ -112,6 +112,23 @@ namespace Nodify.LogicCircuit
 
                 }
             }
+        }*/
+
+        protected override void OnInputValueChanged()
+        {
+            if (_expr != null && Output.Count > 0)
+            {
+                try
+                {
+                    Input.ForEach(i => _expr.Substitute(i.Title!, i.Value));
+                    Output[0].Value = _expr.Result;
+                }
+                catch
+                {
+                    // Handle parse/eval errors if needed
+                }
+            }
         }
+
     }
 }
